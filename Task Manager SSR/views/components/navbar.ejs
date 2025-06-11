@@ -1,0 +1,58 @@
+<div class="parent">
+  <div class="bar bg-black">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap Logo">
+          <use xlink:href="#bootstrap"></use>
+        </svg>
+        <span class="fs-4 text-light">Task Manager</span>
+      </a>
+
+      <ul class="nav nav-pills px-4">
+
+        <% if (isAuth) { %>
+          <!-- Dashboard/Home when logged in -->
+          <li class="nav-item">
+            <a href="/" class="nav-link text-light bg-success px-4 me-2" aria-current="page">Home</a>
+          </li>
+          <li class="nav-item">
+            <form action="/logout" method="POST" style="display: inline;">
+              <button type="submit" id="logout" class="btn btn-primary ms-2">Logout</button>
+            </form>
+          </li>
+
+        <% } else { %>
+
+          <% if (flag === 3) { %>
+            <li class="nav-item">
+              <a href="/login" class="nav-link text-light bg-success px-4 me-2">Login</a>
+            </li>
+            <li class="nav-item">
+              <a href="/signup" class="btn btn-success">Sign-up</a>
+            </li>
+          <% } %>
+
+          <% if (flag === 1) { %>
+            <li class="nav-item">
+              <a href="/signup" class="btn btn-success">Sign-up</a>
+            </li>
+          <% } %>
+
+          <% if (flag === 0) { %>
+            <li class="nav-item">
+              <a href="/login" class="nav-link text-light bg-success px-4 me-2">Login</a>
+            </li>
+          <% } %>
+
+        <% } %>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link text-light">FAQs</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link text-light">About</a>
+        </li>
+      </ul>
+    </header>
+  </div>
+</div>

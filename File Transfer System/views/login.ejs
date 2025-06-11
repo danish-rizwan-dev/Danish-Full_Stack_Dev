@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <title> File Transfer - Login page </title>
+    <%- include('shared/links'); %>
+</head>
+<body>
+    <%- include('shared/nav',{isAuth}); %>
+
+    <div class="login-container">
+  <div id="formContent">
+    <p class="login-message">Login To Your Account</p>
+    <form>
+      <input class="text" id="email"name="email" placeholder="email">
+      <input type="password" class="text" id="password"  name="password" placeholder="Password">
+      <input type="submit" class="text" id="loginbtn" value="Log In">
+    </form>
+     <p id="error-message"></p> 
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
+  </div>
+</div>
+    <%- include('shared/footer') %>
+    <script src="/js/login.js"></script>
+</body>
+</html>

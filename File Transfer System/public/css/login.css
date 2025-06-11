@@ -1,0 +1,91 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+html, body {
+   cursor: default !important;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: url('/images/1.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+.parent{
+   cursor: default !important;
+    display:flex;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 90px;
+    color: rgb(0, 0, 0);
+    box-shadow: rgb(18, 26, 35) 0px 20px 30px -10px;
+}
+
+.navbar{
+    background-color: #100326f6;
+
+}
+
+.navbar-nav .nav-link {
+  color: white;
+  font-size: large;
+}
+
+.navbar-nav .nav-link:hover {
+  color: rgb(46, 11, 246);
+}
+
+.login-container {
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: auto;
+  background-color: #10002bd7;
+  border-radius: 15px;
+  box-shadow: rgba(7, 44, 139, 0.4) 0px 10px 36px 0px , rgba(156, 46, 240, 0.3) 10px 10px, rgba(46, 211, 240, 0.2) 15px 15px, rgba(46, 240, 188, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+  padding: 50px 30px;
+  text-align: center;
+  margin-top: 50px;
+  margin-left: -100px;
+  cursor: default !important;
+}
+
+.text{
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+#formFooter {
+  margin-top: 10px;
+}
+
+.underlineHover {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.underlineHover:hover {
+  text-decoration: underline;
+}
+
+.login-message{
+  color: rgb(255, 255, 255);
+    font-size: x-large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

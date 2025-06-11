@@ -1,0 +1,49 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+html, body {
+   cursor: default !important;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+}
+
+.navbar{
+    background-color: #100326f6;
+}
+
+.navbar-nav .nav-link {
+  color: white;
+  font-size: large;
+}
+
+.parent{
+   cursor: default !important;
+    display:flex;
+    justify-self: left;
+    padding: 16px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    width: auto;
+    height:auto; 
+    border-radius: 20px;
+    margin-left: 30px;
+    box-shadow: rgb(18, 26, 35) 0px 20px 30px -10px;
+} 
+
+#link{
+     margin-top: 10px !important;
+     font-size: large;
+     font-weight: bold;
+     margin: 50px;
+}
+
+.upload-section{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 5vh;
+}

@@ -1,0 +1,79 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  min-height: 100;
+}
+
+
+.parent{
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 4px 12px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    justify-content: center;
+    align-items: center;
+}
+.login-container:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+ 
+.heading {
+    text-align: center;
+    color: #10c558;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.btn-success {
+    width: 100%;
+    background-color: #27ac25;
+}
+
+.btn-success:hover {
+    background-color: #27ac25;
+}
+
+.error-message {
+    color: #e74c3c;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.remember-me {
+    font-size: 14px;
+    color: #666;
+}   
+
+.remember-me input {
+    margin-right: 10px;
+}
+
+.forgot-password {
+    font-size: 14px;
+    text-align: right;
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+    color: #2980b9;
+}
+
+

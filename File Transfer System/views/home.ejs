@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Transfer - Home</title>
+  <link rel="stylesheet" href="/css/home.css">
+  <%- include('shared/links'); %>
+</head>
+<body>
+  <%- include('shared/nav', { isAuth });%>
+    <h2 class="text-center mt-5 text-primary " >Upload Files First to Share...</h2>
+
+ <div class="upload-section ">
+      <form onsubmit="uploadFile(event)">
+        <img src="/images/upload.png" alt="Upload Icon" style="width: 40px; height: 40px; margin-bottom: 20px;">
+         <input type="file" class="btn btn-outline-primary mb-3 " id="fileInput" name="imageFile" multiple >
+        <button type="submit" class="btn btn-primary mb-3">Upload File</button>
+        <div id="link"></div>
+      </form>
+  </div>
+
+  <div class="text-center">
+      <button id="uploadedBtn" class="btn btn-primary mb-3">Show Uploaded File</button>
+      <button id="sharedBtn" class="btn btn-primary mb-3">Shared File</button>
+      <button id="receivedBtn" class="btn btn-primary mb-3">Received File</button>
+  </div>
+
+  <div class="parent " id="uploaded-files" >
+      <div class="uploaded-files"> 
+          <h3>Your Uploaded Files</h3>
+          <% if (files && files.length > 0) { %>
+            <table class="table table-bordered mt-3">
+              <thead>
+                <tr>
+                  <th>File Name</th>
+                  <th>Uploaded At</th>
+                  <th>View</th>
+                  <th>Share With</th>
+                  <th>Delete File</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% files.forEach(function(file){ %>
+                  <tr>
+                    <td><%= file.name %></td>
+                    <td><%= file.uploaded_at.toLocaleString() %></td>
+                    <td>
+                      <a href="/download?imageFile=<%= file.name %>" class="btn btn-sm btn-success" target="_blank">View</a>
+                    </td>
+                    <td>
+                      <form class="d-flex gap-2">
+                        <input type="hidden" name="document_id" value="<%= file.id %>">
+                        <input type="email" name="email" placeholder="Recipient Email" class="form-control" required>
+                        <button type="button" class="btn btn-sm btn-primary share-btn">Share</button>
+                      </form>
+                    </td>
+                    <td>
+                     <form class="d-flex gap-2">
+                        <input type="hidden" name="delete_id" value="<%= file.id %>">
+                        <button type="button" class="btn btn-sm btn-danger delete-btn">Delete</button>
+                      </form>
+                    </td>
+                  </tr>
+                <% });%>
+              </tbody>
+            </table>
+          <% } else { %> 
+            <p>No files uploaded .</p>
+          <% } %>
+   </div>
+    </div>
+  
+  <div class="parent" id="shared-files">
+        <div class="Files-sent">
+              <h3>Files Shared </h3>
+          <% if (sharedFiles && sharedFiles.length > 0) { %>
+            <table class="table table-bordered mt-3">
+              <thead>
+                <tr>
+                  <th>File Name</th>
+                  <th>Shared At</th>
+                  <th>Shared With</th>
+                  <th>View File</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% sharedFiles.forEach(function(data){
+                 %>
+                  <tr>
+                    <td><%= data.document_name %></td>
+                    <td><%= data.shared_at.toLocaleString() %></td>
+                     <td><%= data.receiver_email %></td>
+                    <td><a href="/download?imageFile=<%= data.document_name %>" class="btn btn-sm btn-success" target="_blank">View</a> </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          <% } else { %>
+            <p>No files uploaded .</p>
+          <% } %>
+        </div>
+    </div>
+
+  <div class="parent" id="received-files">
+        <div class="Files-sent">
+              <h3>Files Received </h3>
+          <% if (recievedFiles && recievedFiles.length > 0) { %>
+            <table class="table table-bordered mt-3">
+              <thead>
+                <tr>
+                  <th>File Name</th>
+                  <th>Received At</th>
+                  <th>Sent by</th>
+                  <th>Download File</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% recievedFiles.forEach(function(data2){
+                 %>
+                  <tr>
+                    <td><%= data2.document_name%></td>
+                    <td><%= data2.shared_at.toLocaleString()%></td>
+                     <td><%= data2.sender_email %></td>
+                    <td> <a href="/download?imageFile=<%= data2.document_name %>" class="btn btn-sm btn-success" target="_blank">Download</a> </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          <% } else { %>
+            <p>No files uploaded .</p>
+          <% } %>
+        </div>
+    </div>
+
+  <%- include('shared/footer'); %>
+  <script src="/js/home.js"></script>
+</body>
+</html>
