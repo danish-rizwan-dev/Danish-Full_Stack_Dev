@@ -1,0 +1,8 @@
+body {
+background: linear-gradient(135deg,#00634a 0%, #016d52 100%);
+/* background-image: url("/images/background.jpg"); */
+}
+
+.login-form{
+  border-radius: 20px;
+}

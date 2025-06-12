@@ -1,0 +1,54 @@
+body {
+  background: linear-gradient(135deg,#00634a 0%, #016d52 100%);
+  /* background-image: url("/images/background.jpg"); */
+}
+
+.parent{
+    display: flex;
+    width: auto;
+}
+
+.resume-card {
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  width: 200px;
+  height: 250px;
+  align-content: center;
+  margin-left: 250px;
+  margin-top: 80px;
+  border-radius: 8px;
+  font-size: 90px;
+  font-weight: bolder;
+}
+
+.details-card{
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  width: 200px;
+  height: 250px;
+  align-content: center;
+  margin-top: 80px;
+  border-radius: 8px;
+  margin-left: 80px;
+}
+
+.details-card.resume-card:hover {
+  transform: scale(1.03);
+}
+
+.resume-title {
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+
+.card-bottom{
+    display: flex;
+    width: 200px;
+    height: 60px;
+    background-color: rgb(0, 0, 0);
+    padding-right: 5px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border: 10px solid #000000;
+}

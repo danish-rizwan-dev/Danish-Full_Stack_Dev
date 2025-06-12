@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign Up | AI Resume Builder</title>
+   <link rel="shortcut icon" href="/images/1.png" type="image/x-icon">
+  <%- include('components/links'); %>
+  <link rel="stylesheet" href="/css/signup.css">
+</head>
+<body>
+  <%- include('components/navbar' ,{isAuth}); %>
+
+  <div class="container text-light mt-5">
+    <div class="row">
+      <div class="col-md-6 d-flex flex-column justify-content-center">
+        <h1><strong>Join the <span class="text-dark">Future</span> of Resume Building</strong></h1>
+        <p class="lead mt-3">
+          Sign up to start building beautiful, AI-assisted resumes in minutes. Our platform helps young professionals
+          showcase their skills and land opportunities with ease and confidence.
+        </p>
+      </div>
+
+      <div class="col-md-4" style="margin-left: 100px;">
+        <div class="card bg-light text-dark p-4 login-form">
+          <img style="width: 50px; align-self: center;" src="/images/login.png" alt="signup-logo">
+          <h3 class="mb-4 text-center">Create Your Account</h3>
+          <form>
+            <div class="form-group mb-3">
+              <label for="name">Full Name</label>
+              <input type="text" class="form-control" id="name" name="name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group mb-3">
+              <label for="email">Email Address</label>
+              <input type="email" class="form-control" id="email" name="email" required placeholder="Enter email">
+            </div>
+            <div class="form-group mb-3">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required placeholder="Create a password">
+            </div>
+            <div class="form-group mb-4">
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required placeholder="Re-enter password">
+            </div>
+            <button type="submit" class="btn btn-success w-100 signupBtn">Sign Up</button>
+             <p id="error" class="mt-3 text-center"></p>
+            <p class="mt-3 text-center">Already have an account? <a href="http://localhost:4000/login" class="text-success">Login here</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+  
+<script src="/js/signup.js"></script>
+</html>

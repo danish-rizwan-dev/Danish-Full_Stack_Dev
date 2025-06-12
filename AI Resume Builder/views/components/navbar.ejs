@@ -1,0 +1,42 @@
+<header class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+  <div class="container">
+    <a class="navbar-brand">
+      <img src="/images/1.png" alt="AI Resume Builder" height="40">
+    </a>
+    <h3 style="font-family: 'Segoe UI', sans-serif; font-weight: bold; margin-top: 5px; font-size: x-large;">
+     <span style="color: #198754; font-size: xx-large;">DR.AI</span> Resume Maker
+    </h3>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+     <% if(isAuth){ %>
+      <div class="d-flex align-items-center ms-auto">
+      <div class="dropdown">
+        <a style ="text-decoration :none" class="text-dark dropdown-toggle d-flex align-items-center" href="#" id="navbarUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="/images/user.png" alt="User" width="32" height="32" class="rounded-circle me-2">
+          <span class = "text-dark"><%=user[0].name %></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown">
+          <li><a class="dropdown-item" href="/profile">Profile</a></li>
+          <li><a class="dropdown-item" href="/settings">Settings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" href="/logout">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    <% }else{%>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav align-items-center">
+        <li class="nav-item">
+          <a class="btn btn-outline-success me-2" href="http://localhost:4000/login">Log in</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-success" href="http://localhost:4000/signup"><img style="width: 20px; margin-right:10px;" src="/images/user.png">Sign up</a>
+        </li> 
+      </ul>
+    </div>
+    <% } %>
+  </div>
+</header>

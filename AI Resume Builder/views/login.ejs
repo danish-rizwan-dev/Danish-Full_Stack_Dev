@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login | AI Resume Builder</title>
+  <link rel="shortcut icon" href="/images/1.png" type="image/x-icon">
+  <%- include('components/links'); %>
+  <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+  <%- include('components/navbar',{isAuth}); %>
+
+  <div class="container text-light mt-5">
+    <div class="row">
+      <div class="col-md-6 d-flex flex-column justify-content-center">
+        <h1><strong>Empowering <span class="text-dark">Youth</span> to Build Impactful Resumes</strong></h1>
+        <p class="lead mt-3">
+          Our AI-powered resume builder simplifies the resume creation process for students and young professionals.
+          Get personalized suggestions, beautiful templates, and expert tips — all in one place.
+        </p>
+      </div>
+      <div class="col-md-4" style="margin-left: 100px;" >
+        <div class="card bg-light text-dark p-4 login-form">
+          <img style="width: 50px; align-self: center;" src="/images/login.png" alt="loign-logo" srcset="">
+          <h3 class="mb-4 text-center">Login to Your Account</h3>
+          <form action="/login" method="POST">
+            <div class="form-group mb-3">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" id="email" name="email" required placeholder="Enter email">
+            </div>
+            <div class="form-group mb-3">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required placeholder="Password">
+            </div>
+            <button class="loginBtn btn btn-success w-100">Login</button>
+            <div id="login-error" class="mt-2 text-center"></div>
+            <p class="mt-3">Don't have an account? <a href="http://localhost:4000/signUp" class="text-success">Sign up here</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="/js/login.js"></script>
+</html>
