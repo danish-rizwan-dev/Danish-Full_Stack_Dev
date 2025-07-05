@@ -1,6 +1,7 @@
 $("#saveBtn").on("click", function (e) {
   e.preventDefault();
-
+  const urlParams = new URLSearchParams(window.location.search);
+  const resume_id = urlParams.get('resume_id');
   const first_name = $("#first-name").val();
   const last_name = $("#last-name").val();
   const job_title = $("#job-title").val();
@@ -8,7 +9,7 @@ $("#saveBtn").on("click", function (e) {
   const phone = $("#phone").val();
   const email = $("#email").val();
 
-  if (!first_name || !last_name || !job_title || !address || !phone || !email) {
+  if (!resume_id||!first_name || !last_name || !job_title || !address || !phone || !email) {
     alert("ALL FIELD ARE REQUIRED");
     return;
   }
@@ -18,6 +19,7 @@ $("#saveBtn").on("click", function (e) {
     method: "post",
     url: "http://localhost:4000/personalDetails",
     data: {
+      resume_id : resume_id,
       name: name,
       job_title: job_title,
       address: address,
@@ -26,9 +28,9 @@ $("#saveBtn").on("click", function (e) {
     },
   })
     .then(function (res) {
-      console.log("Personal Details Uploaded Successfully: " + res);
-      alert("Personal Details Uploaded Successfully: ");
+      console.log("Personal Details Uploaded Successfully: " + resume_id);
       $(".nextBtn").removeAttr("disabled");
+       window.location.href = `http://localhost:4000/ProfessionalExperience?resume_id=${resume_id}`;
     })
     .catch(function (err) {
       console.log("Personal Details Error Occurred: " + err);
@@ -36,7 +38,8 @@ $("#saveBtn").on("click", function (e) {
     });
 });
 
-$(".nextBtn").submit(function (e) {
+$(".nextBtn").on("click",function (e) {
   e.preventDefault();
-  axios.get("http://localhost:4000/ProfessionalExperience");
+    console.log("Personal ho rha hai");
+     window.location.href = `http://localhost:4000/ProfessionalExperience`;
 });

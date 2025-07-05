@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Professional Experience | AI Resume Builder</title>
+    <title>Skills | AI Resume Builder</title>
     <%- include('components/links'); %>
     <link rel="stylesheet" href="/css/personal.css" />
   </head>
@@ -16,48 +16,28 @@
     </h3>
 
     <div class="form-container">
-      <h2>Education</h2>
-      <p>Add your educational details</p>
+      <h2>Skill Sets</h2>
+      <p>Add your top professional key skills</p>
       <form>
-       <div class="appendBox ">
-        <!-- box-1  -->
-        <% let count = 1 %>
-      <div class="professionalExperience shadow p-4 mt-4 m" style="border-radius: 16px;">
+        <div class="appendBox ">
+          <% let count = 1 %>
+        <!-- skills box 1 -->
+        <div class="skills shadow p-4 mt-4 m" style="border-radius: 16px;">
         <div class="input-group">
-          <label id="skill-${count}" class="text-success"><%=count%>.Education</label>
-          <label for="institute-name">Name of Institute:</label>
-          <input type="text" id="institute-name-<%=count%>" value="" />
-        </div>
-
-        <div class="row">
-          <div class="input-group">
-            <label for="degree">Degree:</label>
-            <input type="text" id="degree-<%=count%>" value="" />
-          </div>
-          <div class="input-group">
-            <label for="state">State:</label>
-            <input type="text" id="state-<%=count%>" value="" />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-group">
-            <label for="start-date">Start Date:</label>
-            <input type="date" id="start-date-<%=count%>" placeholder="dd-mm-yyyy" />
-          </div>
-          <div class="input-group">
-            <label for="end-date">End Date:</label>
-            <input type="date" id="end-date-<%=count%>" placeholder="dd-mm-yyyy" />
-          </div>
+          <label id="skill-<%=count%>" ><%=count%>.Skill</label>
+          <label for="skill-name">Name :</label>
+          <input type="text" id="skill-name-<%=count%>" value="" />
         </div>
 
         <div class="input-group">
           <label for="description">Description:</label>
           <textarea id="description-<%=count%>" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"></textarea>
         </div>
+         </div>
         </div>
-      </div>
-        <div class="d-flex justify-content-between align-items-center mt-3">
+
+        <!-- skills box 1 end -->
+        <div class="d-flex justify-content-between align-items-center mt-5">
           <div>
             <button type="button" id="addBtn" class="btn btn-outline-primary btn-sm">
               <i class="bi bi-plus-lg"></i> Add More
@@ -66,6 +46,8 @@
               <i class="bi bi-dash-lg"></i> Remove
             </button>
           </div>
+         </div>
+        
           <div class="submit-group">
       <button type="button" id="saveBtn" >Save</button>
       <button type="submit" class="btn btn-success d-inline-flex align-items-center gap-2 nextBtn" >
@@ -79,10 +61,9 @@
       </svg>
       </button>
     </div>
-        </div>
       </form>
     </div>
 
-    <script src="/js/resumeDetails/education.js"></script>
+    <script src="/js/resumeDetails/skills.js"></script>
   </body>
 </html>

@@ -15,57 +15,68 @@
     <div class="form-container">
     <h2>Professional Experience</h2>
     <p>Add your previous job experiences</p>
-    <form>
+    <form > 
+      <div class="appendBox ">
+        <!-- box-1  -->
+        <% let count = 1 %>
+      <div class="professionalExperience shadow p-4 mt-4 m" style="border-radius: 16px;">
         <div class="row">
+        <label id="skill-<%=count%>" class="text-success"><%=count%>.Professional Experience</label>
         <div class="input-group">
             <label for="position-title">Position Title:</label>
-            <input type="text" id="position-title" value="" />
+            <input type="text" id="position-title-<%=count%>" value="" />
         </div>
         <div class="input-group">
             <label for="company-name">Company Name:</label>
-            <input type="text" id="company-name" value="" />
+            <input type="text" id="company-name-<%=count%>" value="" />
         </div>
         </div>
 
         <div class="row">
         <div class="input-group">
             <label for="city">City:</label>
-            <input type="text" id="city" value="" />
+            <input type="text" id="city-<%=count%>" value="" />
         </div>
         <div class="input-group">
             <label for="state">State:</label>
-            <input type="text" id="state" value="" />
+            <input type="text" id="state-<%=count%>" value="" />
         </div>
         </div>
 
         <div class="row">
         <div class="input-group">
             <label for="start-date">Start Date:</label>
-            <input type="text" id="start-date" placeholder="dd-mm-yyyy" />
+            <input type="date" id="start-date-<%=count%>" placeholder="dd-mm-yyyy" />
         </div>
         <div class="input-group">
             <label for="end-date">End Date:</label>
-            <input type="text" id="end-date" placeholder="dd-mm-yyyy" />
+            <input type="date" id="end-date-<%=count%>" placeholder="dd-mm-yyyy" />
         </div>
         </div>
 
         <div class="input-group">
         <label for="summary">Summary:</label>
-        <textarea id="summary" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"></textarea>
+        <textarea id="summary-<%=count%>" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"></textarea>
         </div>
+        </div>
+        <!-- box-1 ends  -->
+      </div>
 
+      
     <div class="d-flex justify-content-between align-items-center mt-3">
       <div>
-        <button type="button" id="addExperienceBtn" class="btn btn-outline-primary btn-sm ">
+        <button type="button" id="addBtn" class="btn btn-outline-primary btn-sm addBtn">
           <i id="addExperienceBtn" class="bi bi-plus-lg"></i> Add More
         </button>
-        <button type="button" class="btn btn-outline-danger btn-sm ms-2">
+        <button type="button" class="btn btn-outline-danger btn-sm ms-2 removeBtn">
           <i class="bi bi-dash-lg"></i> Remove
         </button>
       </div>
+
+      
       <div class="submit-group">
-      <button type="button" id="saveBtn">Save</button>
-      <button type="submit" class="btn btn-success nextBtn" >
+      <button type="button" id="saveBtn" >Save</button>
+      <button type="submit" class="btn btn-success d-inline-flex align-items-center gap-2 nextBtn" >
        Next
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
        class="bi bi-arrow-right" viewBox="0 0 16 16">

@@ -7,7 +7,6 @@ $(".loginBtn").on("click", function (e) {
       $("#login-error").html("Please enter both email and password.").css("color", "red");
       return;
     }
-
     axios({
       method: "post",
       url: "http://localhost:4000/login",

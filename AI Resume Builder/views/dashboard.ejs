@@ -8,61 +8,74 @@
     <link rel="stylesheet" href="/css/dash.css" />
   </head>
   <body>
-    <%-include('components/navbar',{isAuth,user}); %>
+    <%- include('components/navbar', { isAuth, user }); %>
 
-    <!-- create btn card -->
-    <h3 class="text-light text-center mt-4" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Your Resume Dashboard <p style="font-size: medium;">Begin creating and managing your personalized resumes.</p></h3>
-    <div class="parent ">
-      <div class="bg-white text-center  resume-card" data-bs-toggle="modal" data-bs-target="#create-resume">
-       +
-    </div> 
+    <!-- Page Heading -->
+    <h3 class="text-light text-center mt-4" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+      Your Resume Dashboard
+      <p style="font-size: medium;">Begin creating and managing your personalized resumes.</p>
+    </h3>
 
-     <!-- details card -->
-    <div class="bg-white text-center text-white details-card">
-      <img src="/images/user.png" alt="" width="200px">
-       <div class="card-bottom">   
-       <span class="mt-1 font-weight-bold text-truncate" style="max-width: 200px; padding-left: 4px;">Full Stack Developer and green deve ops chie</span>
-            <div class="d-flex align-items-center ms-auto">
-      <div class="dropdown">
-        <a style ="text-decoration :none" class="text-dark d-flex align-items-center" href="#" id="navbarUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <span class = "text-light" style="font-size: 25px; font-weight: bolder;">⋮</span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown">
-          <li><a class="dropdown-item" href="/profile">View</a></li>
-          <li><a class="dropdown-item" href="/settings">Edit</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item text-danger" href="/logout">Delete</a></li>
-        </ul>
+    <!-- Resume Cards Grid -->
+    <div class="container mt-5">
+      <div class="row justify-content-start">
+
+        <!-- Create Resume Card -->
+        <div class="col-md-3 col-sm-6 mb-5 d-flex justify-content-center">
+          <div class="bg-white text-center resume-card" data-bs-toggle="modal" data-bs-target="#create-resume">
+            +
+          </div>
+        </div>
+
+        <!-- Resume Cards -->
+        <% resume.forEach(function(resume) { %>
+          <div class="col-md-3 col-sm-6 mb-5 d-flex justify-content-center">
+            <div class="bg-white text-center text-white details-card" style="cursor: pointer;">
+              <img  onclick="window.location.href='/preview?resume_id=<%= resume.id %>'" src="/images/user.png" alt="" width="200px">
+              <div class="card-bottom">
+                <span class="mt-1 font-weight-bold text-truncate text-light" style="max-width: 200px; padding-left: 4px;">
+                  <%= resume.job_title || 'Untitled Resume' %>
+                </span>
+                <div class="d-flex align-items-center ms-auto">
+                  <div class="dropdown">
+                    <a style="text-decoration: none;" class="text-white d-flex align-items-center" href="#" id="navbarUserDropdown-<%= resume.id %>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="text-light" style="font-size: 25px; font-weight: bolder;">⋮</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown-<%= resume.id %>">
+                      <li><a class="dropdown-item" href="/preview?resume_id=<%= resume.id %>">View</a></li>
+                      <li><a class="dropdown-item" href="/personal?resume_id=<%= resume.id %>">Edit</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item text-danger" href="/delete-resume?resume_id=<%= resume.id %>">Delete</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <% }); %>
       </div>
     </div>
-       </div>
-    </div>
-    </div>
 
-
-<!-- Modal -->
-<div class="modal fade" id="create-resume" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content shadow-lg border-0 rounded-4">
-      <div class="modal-header bg-success text-white rounded-top-4">
-        <h1 class="modal-title fs-5 mb-0" id="exampleModalLabel">Create New Resume</h1>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <div class="modal-body px-4 py-3">
-        <label for="recipient-name" class="col-form-label fw-semibold">Enter Job Title:</label>
-        <input type="text" class="form-control mt-1" id="recipient-name" placeholder="e.g. Software Developer">
-      </div>
-
-      <div class="modal-footer px-4 pb-4 border-0">
-        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
-        <button type="button" id="create-resume-btn" class="btn btn-success px-4">Create Resume</button>
+    <!-- Create Resume Modal -->
+    <div class="modal fade" id="create-resume" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0 rounded-4">
+          <div class="modal-header bg-success text-white rounded-top-4">
+            <h1 class="modal-title fs-5 mb-0" id="exampleModalLabel">Create New Resume</h1>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body px-4 py-3">
+            <label for="job-name" class="col-form-label fw-semibold">Enter Job Title:</label>
+            <input type="text" class="form-control mt-1" id="job-name" placeholder="e.g. Software Developer">
+          </div>
+          <div class="modal-footer px-4 pb-4 border-0">
+            <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success px-4 createResumeBtn">Create Resume</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-
-<script src="/js/dashboard.js"></script>
-</body>
+    <script src="/js/dashboard.js"></script>
+  </body>
 </html>

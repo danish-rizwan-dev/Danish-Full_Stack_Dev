@@ -1,54 +1,64 @@
 body {
-  background: linear-gradient(135deg,#00634a 0%, #016d52 100%);
-  /* background-image: url("/images/background.jpg"); */
+  background: linear-gradient(135deg, #00634a 0%, #016d52 100%);
 }
 
-.parent{
-    display: flex;
-    width: auto;
+.parent {
+  display: flex;
+  width: auto;
 }
 
 .resume-card {
   transition: transform 0.2s ease;
   cursor: pointer;
-  width: 200px;
-  height: 250px;
-  align-content: center;
-  margin-left: 250px;
-  margin-top: 80px;
-  border-radius: 8px;
+  width: 200px !important;
+  height: 250px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 90px;
   font-weight: bolder;
+  border-radius: 8px;
+  color: #00634a;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;}
+.resume-card:hover {
+  transform: scale(1.05);
 }
 
-.details-card{
+.details-card {
   transition: transform 0.2s ease;
   cursor: pointer;
   width: 200px;
   height: 250px;
-  align-content: center;
-  margin-top: 80px;
   border-radius: 8px;
-  margin-left: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
 }
 
-.details-card.resume-card:hover {
+.details-card:hover {
   transform: scale(1.03);
 }
 
-.resume-title {
-  font-weight: bold;
-  padding: 10px;
-  text-align: center;
+.card-bottom {
+  display: flex;
+  width: 200px;
+  height: 60px;
+  background-color: #000000;
+  padding: 0 5px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #333;
 }
 
-.card-bottom{
-    display: flex;
-    width: 200px;
-    height: 60px;
-    background-color: rgb(0, 0, 0);
-    padding-right: 5px;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    border: 10px solid #000000;
+.card-bottom span {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: white;
 }
