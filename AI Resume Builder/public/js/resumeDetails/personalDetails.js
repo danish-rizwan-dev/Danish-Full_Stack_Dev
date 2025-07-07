@@ -14,7 +14,7 @@ $("#saveBtn").on("click", function (e) {
     return;
   }
 
-  let name = first_name + " " + last_name;
+  let name = first_name.trim() + " " + last_name.trim();
   axios({
     method: "post",
     url: "http://localhost:4000/personalDetails",

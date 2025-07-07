@@ -21,21 +21,39 @@
       <form>
         <div class="appendBox ">
           <% let count = 1 %>
+          <% if(result && result.length >  0) { %>
+          <% result.forEach(function(data){ %>
         <!-- skills box 1 -->
         <div class="skills shadow p-4 mt-4 m" style="border-radius: 16px;">
         <div class="input-group">
           <label id="skill-<%=count%>" ><%=count%>.Skill</label>
           <label for="skill-name">Name :</label>
-          <input type="text" id="skill-name-<%=count%>" value="" />
+          <input type="text" id="skill-name-<%=count%>" value="<%= data.name%>" />
+        </div>
+
+        <div class="input-group">
+          <label for="description">Description:</label>
+          <textarea id="description-<%=count%>" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"><%= data.description %></textarea>
+        </div>
+         </div> 
+         <% count++; %>
+          <% }); %>
+          <% }else{ %>
+        <div class="skills shadow p-4 mt-4 m" style="border-radius: 16px;">
+        <div class="input-group">
+          <label id="skill-<%=count%>" ><%=count%>.Skill</label>
+          <label for="skill-name">Name :</label>
+          <input type="text" id="skill-name-<%=count%>" />
         </div>
 
         <div class="input-group">
           <label for="description">Description:</label>
           <textarea id="description-<%=count%>" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"></textarea>
         </div>
-         </div>
+         </div> 
+       
+         <% } %>
         </div>
-
         <!-- skills box 1 end -->
         <div class="d-flex justify-content-between align-items-center mt-5">
           <div>
@@ -48,7 +66,7 @@
           </div>
          </div>
         
-          <div class="submit-group">
+       <div class="submit-group">
       <button type="button" id="saveBtn" >Save</button>
       <button type="submit" class="btn btn-success d-inline-flex align-items-center gap-2 nextBtn" >
        Next

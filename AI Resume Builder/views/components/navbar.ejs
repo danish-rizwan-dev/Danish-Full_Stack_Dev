@@ -13,13 +13,15 @@
     </button>
      <% if(isAuth){ %>
       <div class="d-flex align-items-center ms-auto">
+        <a class="btn btn-outline-success me-2 text-dark" href="http://localhost:4000/login">Dashboard</a>
       <div class="dropdown">
         <a style ="text-decoration :none" class="text-dark dropdown-toggle d-flex align-items-center" href="#" id="navbarUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <img src="/images/user.png" alt="User" width="32" height="32" class="rounded-circle me-2">
           <span class = "text-dark"><%=user[0].name %></span>
         </a>
+         
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown">
-          <li><a class="dropdown-item" href="/profile">Profile</a></li>
+          <li><a class="dropdown-item" href="/dashboard">Profile</a></li>
           <li><a class="dropdown-item" href="/settings">Settings</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item text-danger" href="/logout">Logout</a></li>

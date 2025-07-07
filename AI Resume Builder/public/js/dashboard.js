@@ -8,11 +8,12 @@ $(".createResumeBtn").on("click", async function(e) {
   }
 
   try {
+    console.log("Creating Resume with Job Title:", job_title);
     const res = await axios.post("http://localhost:4000/resume", {
       job_title
     }); 
     console.log("Resume Created Successfully:", res);
-    window.location.href = `http://localhost:4000/personal?resume_id=${res.data}`;
+    window.location.href = `http://localhost:4000/personalDetails?resume_id=${res.data}`;
   } catch (error) {
     console.error("Error:", error);
     alert("An Error Occurred");

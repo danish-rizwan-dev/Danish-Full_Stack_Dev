@@ -5,71 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Preview | AI Resume Builder</title>
     <%- include('components/links'); %>
-    <link rel="stylesheet" href="/css/personal.css" />
+    <link rel="stylesheet" href="/css/preview.css" />
   </head>
+
   <body>
-    <%-include('components/navbar',{isAuth,user}); %>
-    <h3 class="text-light text-center mt-4" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
-      Congrats! Your resume is ready!
-      <p style="font-size: medium;">You can now download your resume or share its unique URL with your friends and family.</p>
-    </h3>
-     <div class="submit-group text-center mb-4">
-      <button type="button" id="saveBtn" ><img src="/images/download.png" > Download</button>
-      <button type="submit" class="btn btn-success"><img src="/images/share.png"> 
-       Share URL
+    <%- include('components/navbar', { isAuth, user }); %>
+
+    <div class="text-center mt-5">
+      <h2 class="text-light">🎉 Congrats! Your resume is ready!</h2>
+      <p class="text-light">Download your resume or share your unique URL.</p>
+    </div>
+    
+    <div class="submit-group text-center mb-4">
+      <button type="button" id="saveBtn">
+        <img src="/images/download.png"> Download
+      </button>
+      <button type="submit" class="btn btn-success">
+        <img src="/images/share.png"> Share URL
       </button>
     </div>
-     <div class="form-container text-truncate container-fluid">
-    <form >
-      <header>
-    <h1><%= userDetails.name %></h1>
-    <p><%= userDetails.job_title %></p>
-    <p>Email: <%= userDetails.email %> | Phone: <%= userDetails.phone %></p>
-    <p>Address: <%= userDetails.address %></p>
-  </header>
+    <% if(userDetails && professionalExperience && education && skills){ %>
+    <div class="resume container-fluid">
+      <form>
+        <header class="text-center mb-4">
+          <h1><%= userDetails.name %></h1>
+          <p><%= userDetails.job_title %></p>
+          <p>Email: <%= userDetails.email %> | Phone: <%= userDetails.phone %></p>
+          <p>Address: <%= userDetails.address %></p>
+        </header>
 
-  <section>
-    <h2>Professional Experience</h2>
-    <ul>
-      <% professionalExperience.forEach(function(exp) { %>
-        <li>
-          <strong><%= exp.position_title %></strong><br>
-          <%= exp.company_name %> | <%= exp.city %>, <%= exp.state %> | <%= exp.start_date %> - <%= exp.end_date %><br>
-          <p><%= exp.summary %></p>
-        </li>
-      <% }); %>
-    </ul>
-  </section>
+        <section>
+          <h2>Professional Experience</h2>
+          <ul>
+            <% professionalExperience.forEach(function(exp) { %>
+              <li>
+                <strong><%= exp.position_title %></strong><br>
+                <%= exp.company_name %> — <%= exp.city %>, <%= exp.state %> <br>
+                <em><%= new Date(exp.start_date).toISOString().substring(0, 10) %> - <%= new Date(exp.end_date).toISOString().substring(0, 10) %></em>
+                <p><%= exp.summary %></p>
+              </li>
+            <% }); %>
+          </ul>
+        </section>
 
-  <section>
-    <h2>Education</h2>
-    <ul>
-      <% education.forEach(function(edu) { %>
-        <li>
-          <strong><%= edu.degree %> in <%= edu.institute_name %></strong><br>
-          <%= edu.state %> | <%= edu.start_date %> - <%= edu.end_date %><br>
-          <p><%= edu.description %></p>
-        </li>
-      <% }); %>
-    </ul>
-  </section>
+        <section>
+          <h2>Education</h2>
+          <ul>
+            <% education.forEach(function(edu) { %>
+              <li>
+                <strong><%= edu.degree %> - <%= edu.institute_name %></strong><br>
+                <%= edu.state %> <br>
+                <em><%= new Date(edu.start_date).toISOString().substring(0, 10) %> - <%= new Date(edu.end_date).toISOString().substring(0, 10) %></em>
+                <p><%= edu.description %></p>
+              </li>
+            <% }); %>
+          </ul>
+        </section>
 
-  <section>
-    <h2>Skills</h2>
-    <ul>
-      <% skills.forEach(function(skill) { %>
-        <li><%= skill.name %>: <%= skill.description %></li>
-      <% }); %>
-    </ul>
-  </section>
+        <section>
+          <h2>Skills</h2>
+          <ul>
+            <% skills.forEach(function(skill) { %>
+              <li><strong><%= skill.name %></strong>: <%= skill.description %></li>
+            <% }); %>
+          </ul>
+        </section>
 
-  <footer>
-    <p>Generated on: <%= new Date().toLocaleDateString() %></p>
-  </footer>
-
-      
-    </form>   
+        <footer>
+          <p>Generated on: <%= new Date().toLocaleDateString() %></p>
+        </footer>
+      </form>
+      <% }else{%>
+      <div class="text-center mt-5">
+        <h2 class="text-light">Please complete your resume details first!</h2>
+        <p class="text-light">Make sure to fill out all sections: Personal Details, Professional Experience, Education, and Skills.</p>
+        <% } %>
     </div>
+
     <script src="/js/resumeDetails/preview.js"></script>
   </body>
 </html>

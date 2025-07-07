@@ -21,42 +21,57 @@
       <form>
        <div class="appendBox ">
         <!-- box-1  -->
-        <% let count = 1 %>
+         <%  let count = 0  %>
+         <% if(education && education.length > 0){ %>
+          <% education.forEach(function(data){%>
+        <%  count++ %>
       <div class="professionalExperience shadow p-4 mt-4 m" style="border-radius: 16px;">
         <div class="input-group">
           <label id="skill-${count}" class="text-success"><%=count%>.Education</label>
           <label for="institute-name">Name of Institute:</label>
-          <input type="text" id="institute-name-<%=count%>" value="" />
+          <input type="text" id="institute-name-<%=count%>" value="<%= data.institute_name %>" />
         </div>
 
         <div class="row">
           <div class="input-group">
             <label for="degree">Degree:</label>
-            <input type="text" id="degree-<%=count%>" value="" />
+            <input type="text" id="degree-<%=count%>" value="<%= data.degree %>" />
           </div>
           <div class="input-group">
             <label for="state">State:</label>
-            <input type="text" id="state-<%=count%>" value="" />
+            <input type="text" id="state-<%=count%>" value="<%= data.state %>" />
           </div>
         </div>
 
         <div class="row">
-          <div class="input-group">
-            <label for="start-date">Start Date:</label>
-            <input type="date" id="start-date-<%=count%>" placeholder="dd-mm-yyyy" />
-          </div>
-          <div class="input-group">
-            <label for="end-date">End Date:</label>
-            <input type="date" id="end-date-<%=count%>" placeholder="dd-mm-yyyy" />
-          </div>
-        </div>
+              <div class="input-group">
+                <label for="start-date-<%= count %>">Start Date:</label>
+                <input
+                  type="date"
+                  id="start-date-<%= count %>"
+                  value="<%= data.start_date.toISOString().substring(0, 10) %>"
+                />
+              </div>
+              <div class="input-group">
+                <label for="end-date-<%= count %>">End Date:</label>
+                <input
+                  type="date"
+                  id="end-date-<%= count %>"
+                  value="<%= data.end_date.toISOString().substring(0, 10) %>"
+                />
+              </div>
+            </div>
 
         <div class="input-group">
           <label for="description">Description:</label>
-          <textarea id="description-<%=count%>" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"></textarea>
+          <textarea id="description-<%=count%>" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"><%= data.description %></textarea>
         </div>
         </div>
+        <% }) %>
+      <% } %>
       </div>
+      
+      <!-- box ends -->
         <div class="d-flex justify-content-between align-items-center mt-3">
           <div>
             <button type="button" id="addBtn" class="btn btn-outline-primary btn-sm">
