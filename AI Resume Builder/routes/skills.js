@@ -23,15 +23,14 @@ Router.post("/", async function (req, res) {
   console.log(skills);
 
   try {
+    await executeQuery(`DELETE FROM skills WHERE resume_id = ? `, [skills[0].resume_id]);
     for (let i = 0; i < skills.length; i++) {
-      const skill = skills[i];
+    const skill = skills[i];
     await executeQuery(`
       INSERT INTO skills (
         name, resume_id, description
       )
       VALUES (?, ?, ?)
-      ON DUPLICATE KEY UPDATE
-        description = VALUES(description)
     `, [
       skill.name,
       skill.resume_id,

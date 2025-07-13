@@ -1,13 +1,15 @@
 const express = require("express");
-const Router = express.Router();
 const { executeQuery } = require("../database/dbHelper");
-const personal = require("./personal");
+const Router = express.Router();
+const ejs = require("ejs");
+const puppeteer = require("puppeteer");
 
 Router.get("/", async function (req, res) {
   const { isAuth,userId} = req;
   if (!isAuth) return res.redirect("/login");
   const resume_id = req.query.resume_id;
   try {
+    console.log("hello");
     const user = await executeQuery(`SELECT * FROM users WHERE id = ?`, [userId]);
     // Fetch personal details
     const [userDetails] = await executeQuery(
@@ -32,8 +34,8 @@ Router.get("/", async function (req, res) {
       `SELECT * FROM skills WHERE resume_id = ? `,
       [resume_id]
     );
-    
-    res.render("preview", {
+
+    const htmlString = await ejs.renderFile("./views/preview.ejs", {
       isAuth,
       user,
       userDetails,
@@ -41,12 +43,22 @@ Router.get("/", async function (req, res) {
       education,
       skills,
     });
+    // Launch the browser and open a new blank page
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+    await page.setContent(htmlString);
+    await page.pdf({
+      path: "resume.pdf",
+      format: "A4",
+    });
+
+    await browser.close();
+    // res.send("File generated");
+    res.download("resume.pdf");
   } catch (error) {
-    console.error("Preview error:", error.message);
-    res.status(500).send("Server error while generating resume preview.");
+    console.log(error);
   }
 });
 
-
-
-module.exports = { previewRouter: Router };
+module.exports = { generatePdfRouter: Router };

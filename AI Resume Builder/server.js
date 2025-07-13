@@ -17,6 +17,7 @@ const { personalDetailsRouter } = require("./routes/personal");
 const { skillsRouter } = require("./routes/skills");
 const { resumeRouter } = require("./routes/resume");
 const { homeRouter } = require("./routes/home");
+const { generatePdfRouter } = require("./routes/generatepdf");
 
 app.use(cookieParser());
 app.use(bodyparser.json());
@@ -38,6 +39,7 @@ app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/preview", previewRouter);
+app.use("/generatePdf", generatePdfRouter);
 
 app.listen(constants.PORT, function() {
   console.log("AI Resume Builder Server Started : " + constants.PORT);

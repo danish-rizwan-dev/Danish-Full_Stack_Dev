@@ -9,31 +9,31 @@
   </head>
   <body>
     <%-include('components/navbar',{isAuth,user}); %>
-
+    
     <h3 class="text-light text-center mt-4" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
       Edit Your Resume
       <p style="font-size: medium;">Please provide the necessary information for your resume.</p>
     </h3>
-
+    
     <div class="form-container">
       <h2>Education</h2>
       <p>Add your educational details</p>
       <form>
-       <div class="appendBox ">
-        <!-- box-1  -->
-         <%  let count = 0  %>
-         <% if(education && education.length > 0){ %>
-          <% education.forEach(function(data){%>
-        <%  count++ %>
-      <div class="professionalExperience shadow p-4 mt-4 m" style="border-radius: 16px;">
-        <div class="input-group">
-          <label id="skill-${count}" class="text-success"><%=count%>.Education</label>
-          <label for="institute-name">Name of Institute:</label>
-          <input type="text" id="institute-name-<%=count%>" value="<%= data.institute_name %>" />
-        </div>
-
-        <div class="row">
-          <div class="input-group">
+        <div class="appendBox ">
+          <!-- box-1  -->
+          <%  let count = 0  %>
+          <% if(education && education.length > 0){ %>
+            <%  count++ %>
+            <% education.forEach(function(data){%>
+              <div class="professionalExperience shadow p-4 mt-4 m" style="border-radius: 16px;">
+              <div class="input-group">
+                <label id="skill-${count}" class="text-success"><%=count%>.Education</label>
+                <label for="institute-name">Name of Institute:</label>
+                <input type="text" id="institute-name-<%=count%>" value="<%= data.institute_name %>" />
+              </div>
+              
+              <div class="row">
+                <div class="input-group">
             <label for="degree">Degree:</label>
             <input type="text" id="degree-<%=count%>" value="<%= data.degree %>" />
           </div>
@@ -42,35 +42,76 @@
             <input type="text" id="state-<%=count%>" value="<%= data.state %>" />
           </div>
         </div>
-
+        
         <div class="row">
-              <div class="input-group">
-                <label for="start-date-<%= count %>">Start Date:</label>
-                <input
-                  type="date"
-                  id="start-date-<%= count %>"
-                  value="<%= data.start_date.toISOString().substring(0, 10) %>"
-                />
-              </div>
-              <div class="input-group">
-                <label for="end-date-<%= count %>">End Date:</label>
-                <input
-                  type="date"
-                  id="end-date-<%= count %>"
-                  value="<%= data.end_date.toISOString().substring(0, 10) %>"
-                />
-              </div>
-            </div>
-
+          <div class="input-group">
+            <label for="start-date-<%= count %>">Start Date:</label>
+            <input
+            type="date"
+            id="start-date-<%= count %>"
+            value="<%= data.start_date.toISOString().substring(0, 10) %>"
+            />
+          </div>
+          <div class="input-group">
+            <label for="end-date-<%= count %>">End Date:</label>
+            <input
+            type="date"
+            id="end-date-<%= count %>"
+            value="<%= data.end_date.toISOString().substring(0, 10) %>"
+            />
+          </div>
+        </div>
+        
         <div class="input-group">
           <label for="description">Description:</label>
           <textarea id="description-<%=count%>" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"><%= data.description %></textarea>
         </div>
-        </div>
-        <% }) %>
-      <% } %>
       </div>
-      
+        <% }) %>
+      <% }else{ %>
+        <% count++ %>
+        <div class="professionalExperience shadow p-4 mt-4 m" style="border-radius: 16px;">
+              <div class="input-group">
+                <label id="skill-${count}" class="text-success"><%=count%>.Education</label>
+                <label for="institute-name">Name of Institute:</label>
+                <input type="text" id="institute-name-<%=count%>" />
+              </div>
+              
+              <div class="row">
+                <div class="input-group">
+            <label for="degree">Degree:</label>
+            <input type="text" id="degree-<%=count%>"/>
+          </div>
+          <div class="input-group">
+            <label for="state">State:</label>
+            <input type="text" id="state-<%=count%>" />
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="input-group">
+            <label for="start-date-<%= count %>">Start Date:</label>
+            <input
+            type="date"
+            id="start-date-<%= count %>" %>"
+            />
+          </div>
+          <div class="input-group">
+            <label for="end-date-<%= count %>">End Date:</label>
+            <input
+            type="date"
+            id="end-date-<%= count %>"
+            />
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label for="description">Description:</label>
+          <textarea id="description-<%=count%>" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"></textarea>
+        </div>
+      </div>
+      </div>
+      <% } %>
       <!-- box ends -->
         <div class="d-flex justify-content-between align-items-center mt-3">
           <div>

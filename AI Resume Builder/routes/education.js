@@ -2,7 +2,7 @@ const express = require('express');
 const { executeQuery } = require('../database/dbHelper');
 const Router = express.Router();
 
-// Education :
+// Education
 Router.get('/', async function (req, res) {
   const { isAuth, userId } = req;
   const resume_id = req.query.resume_id;
@@ -23,19 +23,12 @@ Router.post("/", async function (req, res) {
   console.log(educationDetails);
 
   try {
+        await executeQuery(`DELETE FROM education WHERE resume_id = ? `, [educationDetails[0].resume_id]);
     for(let i = 0; i < educationDetails.length; i++) {
       const edu = educationDetails[i];
       await executeQuery(`
-        INSERT INTO education (
-          institute_name, degree, state, start_date, end_date, description, resume_id
-        )
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-        ON DUPLICATE KEY UPDATE
-          state = VALUES(state),
-          start_date = VALUES(start_date),
-          end_date = VALUES(end_date),
-          description = VALUES(description)
-      `, [
+        INSERT INTO education (institute_name, degree, state, start_date, end_date, description, resume_id )VALUES (?, ?, ?, ?, ?, ?, ?)
+      `,[
         edu.institute_name,
         edu.degree,
         edu.state,
@@ -44,7 +37,6 @@ Router.post("/", async function (req, res) {
         edu.description,
         edu.resume_id
       ]);
-
     }
     res.send("Education details added/updated successfully.");
   } catch (error) {

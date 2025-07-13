@@ -22,7 +22,7 @@ Router.post("/", async function (req, res) {
     const { professionalExperience } = req.body;
   try {
     for (let i = 0; i < professionalExperience.length; i++) {
-      const exp = professionalExperience[i];
+    const exp = professionalExperience[i];
     await executeQuery(`
       INSERT INTO professionalExperience(resume_id, position_title, company_name, city, state, start_date, end_date, summary )
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
