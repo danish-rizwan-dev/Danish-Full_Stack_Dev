@@ -29,7 +29,7 @@ Router.post("/", async function (req, res) {
       res.send({ message: "User created successfully" });
     }
   } catch (error) {
-    console.error("Signup error:", error);
+    console.log("Signup error:", error);
     res.status(500).json({ message: error.message || "Something went wrong" });
   }
 });

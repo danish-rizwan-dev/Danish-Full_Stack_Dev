@@ -10,18 +10,15 @@ Router.get('/', async function (req, res) {
   try {
     const user = await executeQuery(`SELECT * FROM users WHERE id = ?`, [userId]);
     const education = await executeQuery('SELECT * FROM education WHERE resume_id = ?', [resume_id]);
-    console.log("Education Data:", education);
     res.render('education', { isAuth, user, education });
   } catch (error) {
-    console.error("Database Error:", error.message);
+    console.log("Database Error:", error.message);
     res.status(500).send("Server error while fetching education details.");
   }
 });
 
 Router.post("/", async function (req, res) {
   const {educationDetails} = req.body;
-  console.log(educationDetails);
-
   try {
         await executeQuery(`DELETE FROM education WHERE resume_id = ? `, [educationDetails[0].resume_id]);
     for(let i = 0; i < educationDetails.length; i++) {
@@ -40,7 +37,7 @@ Router.post("/", async function (req, res) {
     }
     res.send("Education details Added successfully.");
   } catch (error) {
-    console.error("Database Error:", error.message);
+    console.log("Database Error:", error.message);
     res.status(500).send("Server error while saving education details.");
   }
 });

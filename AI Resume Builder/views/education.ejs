@@ -57,8 +57,16 @@
           </div>
 
           <div class="input-group">
-            <label for="description">Description:</label>
-            <textarea id="description-<%=count%>" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"><%= data.description %></textarea>
+            <div class="d-flex justify-content-between " style="justify-content: space-between;">
+              <label class="mt-2">Summary:</label>
+              <button class="btn btn-success btn-sm mb-2 mt-1 genAi" value="<%=count%>">Generate from AI ✨</button>
+            </div>
+            <textarea id="summary-<%=count%>" rows="5" style="
+                  padding: 10px;
+                  border: 1px solid #c8e6c9;
+                  border-radius: 6px;
+                  font-size: 16px;
+                "><%= data.description%> </textarea>
           </div>
         </div>
         <% }) %>
@@ -95,8 +103,16 @@
           </div>
 
           <div class="input-group">
-            <label for="description">Description:</label>
-            <textarea id="description-<%=count%>" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"></textarea>
+            <div class="d-flex justify-content-between " style="justify-content: space-between;">
+              <label class="mt-2">Summary:</label>
+              <button class="btn btn-success btn-sm mb-2 mt-1 genAi" value="<%=count%>">Generate from AI ✨</button>
+            </div>
+            <textarea id="summary-<%=count%>" rows="5" style="
+                  padding: 10px;
+                  border: 1px solid #c8e6c9;
+                  border-radius: 6px;
+                  font-size: 16px;
+                "></textarea>
           </div>
         </div>
         <% } %>

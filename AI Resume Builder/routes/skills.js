@@ -10,7 +10,6 @@ Router.get('/', async function (req, res) {
   try {
     const user = await executeQuery(`SELECT * FROM users WHERE id = ?`, [userId]);
     const result = await executeQuery(`SELECT * FROM skills WHERE resume_id = ?`, [resume_id]);
-    console.log( "skils" , result);
     res.render('skills', { isAuth, user, result });
   } catch (error) {
     console.log(error.message);
@@ -20,8 +19,6 @@ Router.get('/', async function (req, res) {
 
 Router.post("/", async function (req, res) {
   const {skills} = req.body;
-  console.log(skills);
-
   try {
     await executeQuery(`DELETE FROM skills WHERE resume_id = ? `, [skills[0].resume_id]);
     for (let i = 0; i < skills.length; i++) {
@@ -39,7 +36,7 @@ Router.post("/", async function (req, res) {
     }
     res.send("Skills saved successfully.");
   } catch (error) {
-    console.error("Database Error:", error);
+    console.log("Database Error:", error);
     res.status(500).send("Server error while saving skills.");
   }
 });

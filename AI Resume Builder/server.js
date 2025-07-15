@@ -7,7 +7,7 @@ const { Auth } = require("./middleware");
 const constants = require("./constant");
 
 const { signupRouter } = require("./routes/signup");
-const { loginRouter } = require("./routes/login");  
+const { loginRouter } = require("./routes/login");
 const { logoutRouter } = require("./routes/logout");
 const { dashboardRouter } = require("./routes/dashboard");
 const { previewRouter } = require("./routes/preview");
@@ -18,14 +18,14 @@ const { skillsRouter } = require("./routes/skills");
 const { resumeRouter } = require("./routes/resume");
 const { homeRouter } = require("./routes/home");
 const { generatePdfRouter } = require("./routes/generatepdf");
+const { genAiRouter } = require("./routes/genAi");
 
 app.use(cookieParser());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
-app.use(cors({ origin: "*", }
-));
+app.use(cors({ origin: "*" }));
 app.use(Auth);
 
 app.use("/", homeRouter);
@@ -40,7 +40,8 @@ app.use("/logout", logoutRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/preview", previewRouter);
 app.use("/generatePdf", generatePdfRouter);
+app.use("/genAi", genAiRouter);
 
-app.listen(constants.PORT, function() {
+app.listen(constants.PORT, function () {
   console.log("AI Resume Builder Server Started : " + constants.PORT);
 });

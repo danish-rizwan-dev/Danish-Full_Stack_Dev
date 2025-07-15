@@ -20,7 +20,7 @@ $("#nextBtn").on("click", function (e) {
     const state = $(`#state-${i}`).val().trim();;
     const start_date = $(`#start-date-${i}`).val();
     const end_date = $(`#end-date-${i}`).val();
-    const description = $(`#description-${i}`).val().trim();
+    const description = $(`#summary-${i}`).val().trim();
    
     if (!institute_name || !degree || !state || !start_date || !end_date) {
       alert(`Education entry ${i} is incomplete. ALL FIELDS ARE REQUIRED.`);
@@ -93,10 +93,18 @@ $("#addBtn").on("click",function(e) {
           </div>
         </div>
 
-        <div class="input-group">
-          <label for="description">Description:</label>
-          <textarea id="description-${count}" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"></textarea>
-        </div>
+         <div class="input-group">
+            <div class="d-flex justify-content-between " style="justify-content: space-between;">
+              <label class="mt-2">Summary:</label>
+              <button class="btn btn-success btn-sm mb-2 mt-1 genAi" value="${count}">Generate from AI ✨</button>
+            </div>
+            <textarea id="summary-${count}" rows="5" style="
+                  padding: 10px;
+                  border: 1px solid #c8e6c9;
+                  border-radius: 6px;
+                  font-size: 16px;
+                "></textarea>
+          </div>
         </div>`;
     $(".appendBox").append(html);
 })
@@ -108,3 +116,46 @@ $(".removeBtn").on("click",function(e) {
       count --;    
     }
 })
+
+
+$(document).on("click", ".genAi", function (e) {
+  e.preventDefault();
+  const i = $(this).attr("value");
+  const institute_name = $(`#institute-name-${i}`).val().trim();
+  const degree = $(`#degree-${i}`).val().trim();
+  const state = $(`#state-${i}`).val().trim();
+  const start_date = $(`#start-date-${i}`).val();
+  const end_date = $(`#end-date-${i}`).val();
+  const description = $(`#summary-${i}`).val();
+
+  if (!institute_name || !degree || !state || !start_date || !end_date){
+    alert("All Fields Are Required of " + [i] + ".Education");
+    return;
+  }
+
+  $(".toast-body").html("Wait while AI is getting your summary....");
+  toast.show();
+
+  axios
+    .post("http://localhost:4000/genAI/education", {
+      degree: degree,
+      institute_name: institute_name,
+      state: state,
+      start_date: start_date,
+      end_date: end_date,
+      description: description,
+    })
+    .then(function (res) {
+      console.log("Gen AI response : " + res.data);
+      $(`#summary-${i}`).html("");
+      $(`#summary-${i}`).html(res.data.message);
+      $(".toast-body").html("Summery is generated successfully");
+      setTimeout(function() {
+        toast.hide();
+      },1000);
+    })
+    .catch(function (err) {
+      $(".toast-body").html(err.data.message).css("color" , "red");
+       console.log("Gen AI Error : " + err);
+    });
+});

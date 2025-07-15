@@ -10,7 +10,6 @@ Router.get("/", async function (req, res) {
   try {
     const user = await executeQuery(`SELECT * FROM users WHERE id = ?`, [userId]);
     const result = await executeQuery(`select * from professionalExperience where resume_id = ?`,[resume_id]);
-    console.log(result);
     res.render("professionalExperience", { isAuth, user, result });
   } catch (error) {
     console.log(error.message);
