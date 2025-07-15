@@ -9,24 +9,20 @@
   </head>
   <body>
     <%- include('components/navbar', { isAuth, user }); %>
-    <!-- Page Heading -->
     <h3 class="text-light text-center mt-4" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
       Your Resume Dashboard
       <p style="font-size: medium;">Begin creating and managing your personalized resumes.</p>
     </h3>
 
-    <!-- Resume Cards Grid -->
     <div class="container mt-5">
       <div class="row justify-content-start">
 
-        <!-- Create Resume Card -->
         <div class="col-md-3 col-sm-6 mb-5 d-flex justify-content-center">
           <div class="bg-white text-center resume-card" data-bs-toggle="modal" data-bs-target="#create-resume">
             +
           </div>
         </div>
 
-        <!-- Resume Cards -->
         <% resume.forEach(function(resume) { %>
           <div class="col-md-3 col-sm-6 mb-5 d-flex justify-content-center">
             <div class="bg-white text-center text-white details-card" style="cursor: pointer;">
@@ -41,10 +37,10 @@
                       <span class="text-light" style="font-size: 25px; font-weight: bolder;">⋮</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown-<%= resume.id %>">
-                      <li><a class="dropdown-item" href="/preview?resume_id=<%= resume.id %>">View</a></li>
+                      <li><a class="dropdown-item" href="/preview?resume_id=<%= resume.id %>">Download</a></li>
                       <li><a class="dropdown-item" href="/personalDetails?resume_id=<%= resume.id %>">Edit</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item text-danger" href="/delete-resume?resume_id=<%= resume.id %>">Delete</a></li>
+                      <li><a class="dropdown-item text-danger deleteResumeBtn" value="<%= resume.id %>">Delete</a></li>
                     </ul>
                   </div>
                 </div>
@@ -55,7 +51,6 @@
       </div>
     </div>
 
-    <!-- Create Resume Modal -->
     <div class="modal fade" id="create-resume" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg border-0 rounded-4">
@@ -74,7 +69,14 @@
         </div>
       </div>
     </div>
-
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11;">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success">
+          <img src="/images/1.png" width="25px" class="rounded me-2 " alt="...">
+          <strong class="me-auto">DR.AI</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" style="font-weight: bolder;"></div>
     <script src="/js/dashboard.js"></script>
   </body>
 </html>

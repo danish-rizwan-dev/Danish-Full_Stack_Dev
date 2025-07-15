@@ -1,9 +1,11 @@
-let count = 1;
+let count = $(".skills").length;
+const toast = $("#liveToast");
 $("#addBtn").on("click",function(e) {
     e.preventDefault(); 
     count ++;
+    console.log("Adding new skill, count: " + count);
     let html = `
-        <div class="skills-${count} shadow p-4 mt-4 m" style="border-radius: 16px;">
+        <div class="skills shadow p-4 mt-4 m" style="border-radius: 16px;">
         <div class="input-group">   
           <label id="skill-${count}" >${count}.Skill</label>
           <label for="skill-name">Name :</label>
@@ -19,16 +21,14 @@ $("#addBtn").on("click",function(e) {
 })
 
 $(".removeBtn").on("click",function(e) { 
-     console.log("remove" + count);
-    e.preventDefault(); 
-  $(`.skills-${count}`).remove();
-    count --;    
-    if(count < 1 ){
-        count = 1
+  e.preventDefault(); 
+    if (count > 1) {
+      $(`.skills`).last().remove();
+      count --;
     }
 })
 
-$("#saveBtn").on("click", function (e) {
+$("#nextBtn").on("click", function (e) {
   e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
     const resume_id = urlParams.get('resume_id');
@@ -47,8 +47,11 @@ $("#saveBtn").on("click", function (e) {
   axios.post("http://localhost:4000/skills", { skills })
     .then(function (res) {
       console.log("Skills saved:", res.data);
-      $(".nextBtn").removeAttr("disabled");
-      window.location.href = `http://localhost:4000/preview?resume_id=${resume_id}`;
+      $(".toast-body").html(res.data);
+      toast.show();
+      setTimeout(function() {
+        window.location.href = `http://localhost:4000/preview?resume_id=${resume_id}`;
+      }, 1000);
     })
     .catch(function (err) {
       console.error("Error saving skills:", err);
@@ -56,8 +59,10 @@ $("#saveBtn").on("click", function (e) {
     });
 });
 
-$(".nextBtn").on("click", function (e) {
+$(".previousBtn").on("click", function (e) {
   e.preventDefault();
-    window.location.href = "http://localhost:4000/Preview";
+  const urlParams = new URLSearchParams(window.location.search);
+  const resume_id = urlParams.get('resume_id');
+  window.location.href = `http://localhost:4000/education?resume_id=${resume_id}`;
 });
 

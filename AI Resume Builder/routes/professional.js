@@ -21,17 +21,12 @@ Router.get("/", async function (req, res) {
 Router.post("/", async function (req, res) {
     const { professionalExperience } = req.body;
   try {
+    await executeQuery(`DELETE FROM professionalExperience WHERE resume_id = ? `, [professionalExperience[0].resume_id]);
     for (let i = 0; i < professionalExperience.length; i++) {
     const exp = professionalExperience[i];
     await executeQuery(`
       INSERT INTO professionalExperience(resume_id, position_title, company_name, city, state, start_date, end_date, summary )
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        ON DUPLICATE KEY UPDATE
-          city = VALUES(city),
-          state = VALUES(state),
-          start_date = VALUES(start_date),
-          end_date = VALUES(end_date),
-          summary = VALUES(summary)
       `, [
         exp.resume_id,
         exp.position_title,
@@ -42,9 +37,8 @@ Router.post("/", async function (req, res) {
         exp.end_date,
         exp.summary
       ]);
-
     }
-    res.send("Professional Experience added/updated successfully.");
+    res.send("Professional Experience Added successfully!.");
   } catch (error) {
     console.error("Database Error:", error.message);
     res.status(500).send("Server error while saving professional experience.");

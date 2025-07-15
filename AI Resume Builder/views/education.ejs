@@ -1,144 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Professional Experience | AI Resume Builder</title>
-    <%- include('components/links'); %>
-    <link rel="stylesheet" href="/css/personal.css" />
-  </head>
-  <body>
-    <%-include('components/navbar',{isAuth,user}); %>
-    
-    <h3 class="text-light text-center mt-4" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
-      Edit Your Resume
-      <p style="font-size: medium;">Please provide the necessary information for your resume.</p>
-    </h3>
-    
-    <div class="form-container">
-      <h2>Education</h2>
-      <p>Add your educational details</p>
-      <form>
-        <div class="appendBox ">
-          <!-- box-1  -->
-          <%  let count = 0  %>
-          <% if(education && education.length > 0){ %>
-            <%  count++ %>
-            <% education.forEach(function(data){%>
-              <div class="professionalExperience shadow p-4 mt-4 m" style="border-radius: 16px;">
-              <div class="input-group">
-                <label id="skill-${count}" class="text-success"><%=count%>.Education</label>
-                <label for="institute-name">Name of Institute:</label>
-                <input type="text" id="institute-name-<%=count%>" value="<%= data.institute_name %>" />
-              </div>
-              
-              <div class="row">
-                <div class="input-group">
-            <label for="degree">Degree:</label>
-            <input type="text" id="degree-<%=count%>" value="<%= data.degree %>" />
-          </div>
-          <div class="input-group">
-            <label for="state">State:</label>
-            <input type="text" id="state-<%=count%>" value="<%= data.state %>" />
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class="input-group">
-            <label for="start-date-<%= count %>">Start Date:</label>
-            <input
-            type="date"
-            id="start-date-<%= count %>"
-            value="<%= data.start_date.toISOString().substring(0, 10) %>"
-            />
-          </div>
-          <div class="input-group">
-            <label for="end-date-<%= count %>">End Date:</label>
-            <input
-            type="date"
-            id="end-date-<%= count %>"
-            value="<%= data.end_date.toISOString().substring(0, 10) %>"
-            />
-          </div>
-        </div>
-        
-        <div class="input-group">
-          <label for="description">Description:</label>
-          <textarea id="description-<%=count%>" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"><%= data.description %></textarea>
-        </div>
-      </div>
-        <% }) %>
-      <% }else{ %>
-        <% count++ %>
-        <div class="professionalExperience shadow p-4 mt-4 m" style="border-radius: 16px;">
-              <div class="input-group">
-                <label id="skill-${count}" class="text-success"><%=count%>.Education</label>
-                <label for="institute-name">Name of Institute:</label>
-                <input type="text" id="institute-name-<%=count%>" />
-              </div>
-              
-              <div class="row">
-                <div class="input-group">
-            <label for="degree">Degree:</label>
-            <input type="text" id="degree-<%=count%>"/>
-          </div>
-          <div class="input-group">
-            <label for="state">State:</label>
-            <input type="text" id="state-<%=count%>" />
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class="input-group">
-            <label for="start-date-<%= count %>">Start Date:</label>
-            <input
-            type="date"
-            id="start-date-<%= count %>" %>"
-            />
-          </div>
-          <div class="input-group">
-            <label for="end-date-<%= count %>">End Date:</label>
-            <input
-            type="date"
-            id="end-date-<%= count %>"
-            />
-          </div>
-        </div>
-        
-        <div class="input-group">
-          <label for="description">Description:</label>
-          <textarea id="description-<%=count%>" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"></textarea>
-        </div>
-      </div>
-      </div>
-      <% } %>
-      <!-- box ends -->
-        <div class="d-flex justify-content-between align-items-center mt-3">
-          <div>
-            <button type="button" id="addBtn" class="btn btn-outline-primary btn-sm">
-              <i class="bi bi-plus-lg"></i> Add More
-            </button>
-            <button type="button" class="btn btn-outline-danger btn-sm ms-2 removeBtn">
-              <i class="bi bi-dash-lg"></i> Remove
-            </button>
-          </div>
-          <div class="submit-group">
-      <button type="button" id="saveBtn" >Save</button>
-      <button type="submit" class="btn btn-success d-inline-flex align-items-center gap-2 nextBtn" >
-       Next
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-       class="bi bi-arrow-right" viewBox="0 0 16 16">
-      <path fill-rule="evenodd"
-          d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 
-             .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 
-             8.5H1.5A.5.5 0 0 1 1 8"/>
-      </svg>
-      </button>
-    </div>
-        </div>
-      </form>
-    </div>
 
-    <script src="/js/resumeDetails/education.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Professional Experience | AI Resume Builder</title>
+  <%- include('components/links'); %>
+  <link rel="stylesheet" href="/css/personal.css" />
+</head>
+
+<body>
+  <%-include('components/navbar',{isAuth,user}); %>
+
+  <h3 class="text-light text-center mt-4" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+    Edit Your Resume
+    <p style="font-size: medium;">Please provide the necessary information for your resume.</p>
+  </h3>
+
+  <div class="form-container">
+    <h2>Education</h2>
+    <p>Add your educational details</p>
+    <form>
+      <div class="appendBox ">
+        <!-- box-1  -->
+        <%  let count = 0  %>
+        <% if(education && education.length > 0){ %>
+        <% education.forEach(function(data){%>
+        <%  count++ %>
+        <div class="education shadow p-4 mt-4 m" style="border-radius: 16px;">
+          <div class="input-group">
+            <label class="text-success"><%=count%>.Education</label>
+            <label for="institute-name">Name of Institute:</label>
+            <input type="text" id="institute-name-<%=count%>" value="<%= data.institute_name %>" />
+          </div>
+
+          <div class="row">
+            <div class="input-group">
+              <label for="degree">Degree:</label>
+              <input type="text" id="degree-<%=count%>" value="<%= data.degree %>" />
+            </div>
+            <div class="input-group">
+              <label for="state">State:</label>
+              <input type="text" id="state-<%=count%>" value="<%= data.state %>" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-group">
+              <label for="start-date-<%= count %>">Start Date:</label>
+              <input type="date" id="start-date-<%= count %>" value="<%= data.start_date.toISOString().substring(0, 10) %>" />
+            </div>
+            <div class="input-group">
+              <label for="end-date-<%= count %>">End Date:</label>
+              <input type="date" id="end-date-<%= count %>" value="<%= data.end_date.toISOString().substring(0, 10) %>" />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="description">Description:</label>
+            <textarea id="description-<%=count%>" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"><%= data.description %></textarea>
+          </div>
+        </div>
+        <% }) %>
+        <% }else{ %>
+        <% count++ %>
+        <div class="education shadow p-4 mt-4 m" style="border-radius: 16px;">
+          <div class="input-group">
+            <label class="text-success"><%=count%>.Education</label>
+            <label for="institute-name">Name of Institute:</label>
+            <input type="text" id="institute-name-<%=count%>" />
+          </div>
+
+          <div class="row">
+            <div class="input-group">
+              <label for="degree">Degree:</label>
+              <input type="text" id="degree-<%=count%>" />
+            </div>
+            <div class="input-group">
+              <label for="state">State:</label>
+              <input type="text" id="state-<%=count%>" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-group">
+              <label for="start-date-<%= count %>">Start Date:</label>
+              <input type="date" id="start-date-<%= count %>" %>"
+              />
+            </div>
+            <div class="input-group">
+              <label for="end-date-<%= count %>">End Date:</label>
+              <input type="date" id="end-date-<%= count %>" />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="description">Description:</label>
+            <textarea id="description-<%=count%>" rows="5" style="padding: 10px; border: 1px solid #c8e6c9; border-radius: 6px; font-size: 16px;"></textarea>
+          </div>
+        </div>
+        <% } %>
+        <!-- box ends -->
+      </div>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <div>
+          <button type="button" id="addBtn" class="btn btn-outline-primary btn-sm">
+            <i class="bi bi-plus-lg"></i> Add More
+          </button>
+          <button type="button" class="btn btn-outline-danger btn-sm ms-2 removeBtn">
+            <i class="bi bi-dash-lg"></i> Remove
+          </button>
+        </div>
+
+        <div class="submit-group">
+          <button type="button" class="btn btn-success d-inline-flex align-items-center gap-2 previousBtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+            </svg> Previous </button>
+          <button type="submit" id="nextBtn" class="btn btn-success d-inline-flex align-items-center gap-2 ">
+            Next
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 
+             .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 
+             8.5H1.5A.5.5 0 0 1 1 8" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header bg-success">
+        <img src="../images/1.png" width="25px" class="rounded me-2 " alt="...">
+        <strong class="me-auto">DR.AI</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body" style="font-weight: bolder;"></div>
+    </div>
+  </div>
+  <script src="/js/resumeDetails/education.js"></script>
+</body>
+
 </html>

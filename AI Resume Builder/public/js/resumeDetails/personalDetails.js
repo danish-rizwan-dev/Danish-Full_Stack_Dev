@@ -1,3 +1,4 @@
+const toast = $("#liveToast");
 $("#saveBtn").on("click", function (e) {
   e.preventDefault();
   const urlParams = new URLSearchParams(window.location.search);
@@ -29,17 +30,15 @@ $("#saveBtn").on("click", function (e) {
   })
     .then(function (res) {
       console.log("Personal Details Uploaded Successfully: " + resume_id);
-      $(".nextBtn").removeAttr("disabled");
-       window.location.href = `http://localhost:4000/ProfessionalExperience?resume_id=${resume_id}`;
+      console.log(res.data);
+      $(".toast-body").html(res.data.message);
+      toast.show();
+      setTimeout(function(){
+         window.location.href = `http://localhost:4000/ProfessionalExperience?resume_id=${resume_id}`;
+      },1000)
     })
     .catch(function (err) {
       console.log("Personal Details Error Occurred: " + err);
       alert("Error Occurred while Personal Details : " + err);
     });
-});
-
-$(".nextBtn").on("click",function (e) {
-  e.preventDefault();
-    console.log("Personal ho rha hai");
-     window.location.href = `http://localhost:4000/ProfessionalExperience`;
 });

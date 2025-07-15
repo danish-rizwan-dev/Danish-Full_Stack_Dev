@@ -1,16 +1,19 @@
+ const toast = $("#liveToast");
  $("#saveBtn").on("click", function (e) {
     e.preventDefault();
      const urlParams = new URLSearchParams(window.location.search);
      const resume_id = urlParams.get('resume_id');
     let professionalExperience = [];
+  
     for (let i = 1; i <= count; i++) {
-    const position_title = $(`#position-title-${i}`).val();
-    const company_name = $(`#company-name-${i}`).val();
-    const city = $(`#city-${i}`).val();
-    const state = $(`#state-${i}`).val();
+    const position_title = $(`#position-title-${i}`).val().trim();
+    const company_name = $(`#company-name-${i}`).val().trim();
+    const city = $(`#city-${i}`).val().trim();
+    const state = $(`#state-${i}`).val().trim();
     const start_date = $(`#start-date-${i}`).val();
     const end_date = $(`#end-date-${i}`).val();
-    const summary = $(`#summary-${i}`).val();
+    const summary = $(`#summary-${i}`).val().trim();
+
     if (!position_title || !company_name || !city || !state || !start_date || !end_date ) {
     alert(`Skill ${i} is empty.
       ALL FIELDS ARE REQUIRED`);
@@ -29,10 +32,11 @@
     })
       .then(function (res) {
         console.log("Professional Experience Uploaded Successfully: ", res);
-        alert("Professional Experience Uploaded Successfully!");
-        $(".nextBtn").removeAttr("disabled");
-        window.location.href = `http://localhost:4000/education?resume_id=${resume_id}`;
-
+        $(".toast-body").html(res.data);
+        toast.show();
+        setTimeout(function() {
+          window.location.href = `http://localhost:4000/education?resume_id=${resume_id}`;
+        }, 1000);
       })
       .catch(function (err) {
         console.error("Professional Experience Error: ", err);
@@ -40,20 +44,21 @@
       });
   });
 
-$(".nextBtn").on("click", function (e) {
-    e.preventDefault();
-    window.location.href = `http://localhost:4000/education`;
+$(".previousBtn").on("click", function (e) {
+   e.preventDefault();
+     const urlParams = new URLSearchParams(window.location.search);
+     const resume_id = urlParams.get('resume_id');
+     window.location.href = `http://localhost:4000/personalDetails?resume_id=${resume_id}`;
+});
 
-  });
-
-let count = 1;
+let count = $(".professionalExperience").length;
 $("#addBtn").on("click",function(e) {
     e.preventDefault(); 
     count ++;
     let html = `
-       <div class="professionalExperience-${count} shadow p-4 mt-4 m" style="border-radius: 16px;">
+       <div class="professionalExperience shadow p-4 mt-4 m" style="border-radius: 16px;">
         <div class="row">
-        <label id="skill-${count}" class="text-success">${count}.Professional Experience</label>
+        <label class="text-success">${count}.Professional Experience</label>
         <div class="input-group"> 
             <label for="position-title">Position Title:</label>
             <input type="text" id="position-title-${count}" value="" />
@@ -95,11 +100,9 @@ $("#addBtn").on("click",function(e) {
 })
 
 $(".removeBtn").on("click",function(e) { 
-    console.log("remove" + count);
-    e.preventDefault(); 
-  $(`.professionalExperience-${count}`).remove();
+  e.preventDefault(); 
+  if(count > 1 ){
+    $(`.professionalExperience`).last().remove();
     count --;    
-    if(count < 1 ){
-        count = 1
-    }
+  }
 })

@@ -36,7 +36,6 @@ Router.post("/", async function (req, res) {
       skill.resume_id,
       skill.description
     ]);
-
     }
     res.send("Skills saved successfully.");
   } catch (error) {

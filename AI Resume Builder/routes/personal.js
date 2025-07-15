@@ -32,7 +32,7 @@ Router.post("/", async function (req, res) {
       email = VALUES(email);`,
       [resume_id, name, job_title, address, phone, email]
     );
-    res.status(200).send("Personal Details Added Succesfully");
+    res.status(200).send({message : "Personal Details Added Succesfully!"});
   } catch (error) {
     console.log(error);
     res.status(400).send("server Error", error);

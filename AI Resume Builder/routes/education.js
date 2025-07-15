@@ -38,7 +38,7 @@ Router.post("/", async function (req, res) {
         edu.resume_id
       ]);
     }
-    res.send("Education details added/updated successfully.");
+    res.send("Education details Added successfully.");
   } catch (error) {
     console.error("Database Error:", error.message);
     res.status(500).send("Server error while saving education details.");

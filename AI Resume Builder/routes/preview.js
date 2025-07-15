@@ -40,6 +40,7 @@ Router.get("/", async function (req, res) {
       professionalExperience,
       education,
       skills,
+      resume_id
     });
   } catch (error) {
     console.error("Preview error:", error.message);
