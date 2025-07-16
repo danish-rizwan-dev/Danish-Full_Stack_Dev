@@ -35,7 +35,7 @@ Router.post("/experience", async function (req, res) {
             summary: ${summary}
     `;
     const genAI = new GoogleGenAI({
-      apiKey: "AIzaSyA88lbHhQ-iUF_2ki48meNcjws_NyENXUA",
+      apiKey: "#",
     });
     const response = await genAI.models.generateContent({
       model: "gemini-2.5-flash",
