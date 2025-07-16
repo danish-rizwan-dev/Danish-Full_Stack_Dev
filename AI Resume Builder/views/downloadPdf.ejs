@@ -11,7 +11,9 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>  
     body {
-      margin: 60px 60px 50px 50px; ;
+        font-family: serif;;
+        color: #333;
+        margin: 40px 30px 30px 50px; ;
     }
 
     .resume {
@@ -91,53 +93,65 @@
     </style>
   </head>
   <body>
-    <% if(userDetails && professionalExperience && education && skills){ %>
-    <div class="resume container-fluid">
-      <form>
-        <header class="text-center mb-4">
-          <h1><%= userDetails.name %></h1>
-          <p><%= userDetails.job_title %></p>
-          <p>Email: <%= userDetails.email %> | Phone: <%= userDetails.phone %></p>
-          <p>Address: <%= userDetails.address %></p>
-        </header>
+     <% if(userDetails && professionalExperience && education && skills){ %>
+  <div class="resume container-fluid">
+    <form>
+      <header class="text-center mb-4">
+        <h1><%= userDetails.name %></h1>
+        <p><%= userDetails.job_title %></p>
+        <p>Email: <%= userDetails.email %> | Phone: <%= userDetails.phone %></p>
+        <p>Address: <%= userDetails.address %></p>
+      </header>
 
-        <section>
-          <h2>Professional Experience</h2>
-          <ul>
-            <% professionalExperience.forEach(function(exp) { %>
-              <li>
-                <strong><%= exp.position_title %></strong><br>
-                <%= exp.company_name %> — <%= exp.city %>, <%= exp.state %> <br>
-                <em><%= new Date(exp.start_date).toISOString().substring(0, 10) %> - <%= new Date(exp.end_date).toISOString().substring(0, 10) %></em>
-                <p><%= exp.summary %></p>
-              </li>
-            <% }); %>
-          </ul>
-        </section>
+      <section>
+        <h2>Professional Experience</h2>
+        <ul>
+          <% professionalExperience.forEach(function(exp) { %>
+          <li>
+          <li class="row">
+            <div class="col">
+              <strong><%= exp.position_title %></strong><br>
+              <%= exp.company_name %> - <%= exp.city %>, <%= exp.state %>
+            </div>
+            <div class="col text-end">
+              <p style="font-weight: bold; margin-bottom: 0px" ><%= new Date(exp.start_date).toISOString().substring(0, 10) %> To <%= new Date(exp.end_date).toISOString().substring(0, 10) %></p>
+            </div>
+          </li>
+          <p><%= exp.summary %></p>
+          </li>
+          <% }); %>
+        </ul>
+      </section>
 
-        <section>
-          <h2>Education</h2>
-          <ul>
-            <% education.forEach(function(edu) { %>
-              <li>
-                <strong><%= edu.degree %> - <%= edu.institute_name %></strong><br>
-                <%= edu.state %> <br>
-                <em><%= new Date(edu.start_date).toISOString().substring(0, 10) %> - <%= new Date(edu.end_date).toISOString().substring(0, 10) %></em>
-                <p><%= edu.description %></p>
-              </li>
-            <% }); %>
-          </ul>
-        </section>
+      <section>
+        <h2>Education</h2>
+        <ul>
+          <% education.forEach(function(edu) { %>
+          <li>
+          <li class="row">
+            <div class="col">
+            <strong><%= edu.degree %> - <%= edu.institute_name %></strong><br>
+            <%= edu.state %> <br>
+            </div>
+            <div class="col text-end">
+              <p style="font-weight: bold;"><%= new Date(edu.start_date).toISOString().substring(0, 10) %>  To  <%= new Date(edu.end_date).toISOString().substring(0, 10) %></p>
+            </div>
+          </li>
+            <p><%= edu.description %></p>
+          </li>
+          <!-- // Displaying education details -->
+          <% }); %>
+        </ul>
+      </section>
 
-        <section>
-          <h2>Skills</h2>
-          <ul>
-            <% skills.forEach(function(skill) { %>
-              <li><strong><%= skill.name %></strong>: <%= skill.description %></li>
-            <% }); %>
-          </ul>
-        </section>
-      </form>
+      <section>
+        <h2>Skills</h2>
+        <ul>
+          <% skills.forEach(function(skill) { %>
+          <li><strong><%= skill.name %></strong>: <%= skill.description %></li>
+          <% }); %>
+        </ul>
+      </section>
       <% }else{%>
       <div class="text-center mt-5">
         <h2 class="text-light">Please complete your resume details first!</h2>

@@ -4,8 +4,12 @@ $(".createResumeBtn").on("click", async function(e) {
   e.preventDefault();
   const job_title = $("#job-name").val().trim();
   if (!job_title) {
-    alert("Enter Job Title");
-    return;
+    $(".toast-body").html("Please Enter a Job Title.");
+    toast.show();
+    setTimeout(function() {
+    toast.hide();
+  },2000);
+   return;
   }
   try {
     console.log("Creating Resume with Job Title:", job_title);

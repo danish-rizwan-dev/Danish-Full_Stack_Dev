@@ -1,6 +1,5 @@
 const express = require("express");
 const Router = express.Router();
-const { executeQuery } = require("../database/dbHelper");
 const { GoogleGenAI } = require("@google/genai");
 
 Router.post("/experience", async function (req, res) {

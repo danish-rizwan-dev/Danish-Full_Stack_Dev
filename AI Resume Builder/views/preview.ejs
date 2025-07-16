@@ -1,89 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Preview | AI Resume Builder</title>
-    <%- include('components/links'); %>
-    <link rel="stylesheet" href="/css/preview.css" />
-  </head>
-  <body>
-    <%- include('components/navbar', { isAuth, user }); %>
-    <div class="text-center mt-5">
-      <h2 class="text-light">🎉 Congrats! Your resume is ready!</h2>
-      <p class="text-light">Download your resume or share your unique URL.</p>
-    </div>
-    
-    <div class="submit-group text-center mb-4 ">
-      <a href="http://localhost:4000/generatePdf?resume_id=<%=resume_id%>"   class="text-decoration-none">
-        <button type="button" id="saveBtn">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Preview | AI Resume Builder</title>
+  <%- include('components/links'); %>
+  <link rel="stylesheet" href="/css/preview.css" />
+</head>
+
+<body>
+  <%- include('components/navbar', { isAuth, user }); %>
+  <div class="text-center mt-5">
+    <h2 class="text-light">🎉 Congrats! Your resume is ready!</h2>
+    <p class="text-light">Download your resume or share your unique URL.</p>
+  </div>
+
+  <div class="submit-group text-center mb-4 ">
+    <a href="http://localhost:4000/generatePdf?resume_id=<%=resume_id%>" class="text-decoration-none">
+      <button type="button" id="saveBtn">
         <img src="/images/download.png"> Download
       </button>
-      </a>
-      <button type="submit" class="btn btn-success">
-        <img src="/images/share.png"> Share URL
-      </button>
+    </a>
+    <button type="submit" class="btn btn-success">
+      <img src="/images/share.png"> Share URL
+    </button>
+  </div>
+
+  <% if(userDetails && professionalExperience && education && skills){ %>
+  <div class="resume container-fluid">
+    <form>
+      <header class="text-center mb-4">
+        <h1><%= userDetails.name %></h1>
+        <p><%= userDetails.job_title %></p>
+        <p>Email: <%= userDetails.email %> | Phone: <%= userDetails.phone %></p>
+        <p>Address: <%= userDetails.address %></p>
+      </header>
+
+      <section>
+        <h2>Professional Experience</h2>
+        <ul>
+          <% professionalExperience.forEach(function(exp) { %>
+          <li>
+          <li class="row">
+            <div class="col">
+              <strong><%= exp.position_title %></strong><br>
+              <%= exp.company_name %> - <%= exp.city %>, <%= exp.state %>
+            </div>
+            <div class="col text-end">
+              <p style="font-weight: bold; margin-bottom: 0px" ><%= new Date(exp.start_date).toISOString().substring(0, 10) %> To <%= new Date(exp.end_date).toISOString().substring(0, 10) %></p>
+            </div>
+          </li>
+          <p><%= exp.summary %></p>
+          </li>
+          <% }); %>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <ul>
+          <% education.forEach(function(edu) { %>
+          <li>
+          <li class="row">
+            <div class="col">
+            <strong><%= edu.degree %> - <%= edu.institute_name %></strong><br>
+            <%= edu.state %> <br>
+            </div>
+            <div class="col text-end">
+              <p style="font-weight: bold;"><%= new Date(edu.start_date).toISOString().substring(0, 10) %>  To  <%= new Date(edu.end_date).toISOString().substring(0, 10) %></p>
+            </div>
+          </li>
+            <p><%= edu.description %></p>
+          </li>
+          <!-- // Displaying education details -->
+          <% }); %>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        <ul>
+          <% skills.forEach(function(skill) { %>
+          <li><strong><%= skill.name %></strong>: <%= skill.description %></li>
+          <% }); %>
+        </ul>
+      </section>
+
+      <footer>
+        <p>Generated on: <%= new Date().toLocaleDateString() %></p>
+      </footer>
+    </form>
+    <% }else{%>
+    <div class="text-center mt-5">
+      <h2 class="text-light">Please complete your resume details first!</h2>
+      <p class="text-light">Make sure to fill out all sections: Personal Details, Professional Experience, Education, and Skills.</p>
+      <% } %>
     </div>
-    
-    <% if(userDetails && professionalExperience && education && skills){ %>
-    <div class="resume container-fluid">
-      <form>
-        <header class="text-center mb-4">
-          <h1><%= userDetails.name %></h1>
-          <p><%= userDetails.job_title %></p>
-          <p>Email: <%= userDetails.email %> | Phone: <%= userDetails.phone %></p>
-          <p>Address: <%= userDetails.address %></p>
-        </header>
 
-        <section>
-          <h2>Professional Experience</h2>
-          <ul>
-            <% professionalExperience.forEach(function(exp) { %>
-              <li>
-                <strong><%= exp.position_title %></strong><br>
-                <%= exp.company_name %> — <%= exp.city %>, <%= exp.state %> <br>
-                <em><%= new Date(exp.start_date).toISOString().substring(0, 10) %> - <%= new Date(exp.end_date).toISOString().substring(0, 10) %></em>
-                <p><%= exp.summary %></p>
-              </li>
-            <% }); %>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Education</h2>
-          <ul>
-            <% education.forEach(function(edu) { %>
-              <li>
-                <strong><%= edu.degree %> - <%= edu.institute_name %></strong><br>
-                <%= edu.state %> <br>
-                <em><%= new Date(edu.start_date).toISOString().substring(0, 10) %> - <%= new Date(edu.end_date).toISOString().substring(0, 10) %></em>
-                <p><%= edu.description %></p>
-              </li>
-            <% }); %>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Skills</h2>
-          <ul>
-            <% skills.forEach(function(skill) { %>
-              <li><strong><%= skill.name %></strong>: <%= skill.description %></li>
-            <% }); %>
-          </ul>
-        </section>
-
-        <footer>
-          <p>Generated on: <%= new Date().toLocaleDateString() %></p>
-        </footer>
-      </form>
-      <% }else{%>
-      <div class="text-center mt-5">
-        <h2 class="text-light">Please complete your resume details first!</h2>
-        <p class="text-light">Make sure to fill out all sections: Personal Details, Professional Experience, Education, and Skills.</p>
-        <% } %>
-    </div>
-
-     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11;">
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11;">
       <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-success">
           <img src="/images/1.png" width="25px" class="rounded me-2 " alt="...">
@@ -96,5 +111,6 @@
       </div>
     </div>
     <script src="/js/resumeDetails/preview.js"></script>
-  </body>
+</body>
+
 </html>

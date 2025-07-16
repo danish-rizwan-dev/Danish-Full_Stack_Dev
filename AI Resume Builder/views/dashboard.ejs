@@ -37,7 +37,7 @@
                       <span class="text-light" style="font-size: 25px; font-weight: bolder;">⋮</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown-<%= resume.id %>">
-                      <li><a class="dropdown-item" href="/preview?resume_id=<%= resume.id %>">Download</a></li>
+                      <li><a class="dropdown-item" href="/preview?resume_id=<%= resume.id %>">View</a></li>
                       <li><a class="dropdown-item" href="/personalDetails?resume_id=<%= resume.id %>">Edit</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item text-danger deleteResumeBtn" value="<%= resume.id %>">Delete</a></li>
@@ -49,6 +49,10 @@
         </div>
         <% }); %>
       </div>
+    </div>
+
+    <div class="chatbot position-fixed btn btn-light bottom-0 mb-5 mx-5 end-0 text-dark" style="font-weight: bolder;">
+      <img src="../images/chatbot.png" width="30px" > DR.AI
     </div>
 
     <div class="modal fade" id="create-resume" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
